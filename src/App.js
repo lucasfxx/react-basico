@@ -6,6 +6,8 @@ import Objeto from "./pages/Objeto";
 import Pagina1 from "./pages/Pagina1";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Container } from "react-bootstrap";
+import Contador from "./pages/Contador";
+import FilmesPopulares from "./pages/filmes/FilmesPopulares";
 
 function App() {
   return (
@@ -13,7 +15,6 @@ function App() {
 
 
       <BrowserRouter>
-
 
 
 
@@ -26,8 +27,10 @@ function App() {
             <Route path="/array" element={<Array />} />
             <Route path="/objeto" element={<Objeto />} />
             <Route path="/pagina1" element={<Pagina1 />} />
+            <Route path="/contador" element={<Contador />} />
+            <Route path="/filmespopulares" element={<FilmesPopulares />} />
           </Routes>
-          <h1>Fim da página fixa</h1>
+
         </Container>
       </BrowserRouter>
 
