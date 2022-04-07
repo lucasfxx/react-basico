@@ -31,8 +31,9 @@ const Contador = () => {
 
        
         {numero}<br/>
-        <Button variant="success" onClick={somar} > + </Button>
         <Button variant="danger" onClick={diminui} > - </Button>
+        <Button variant="success" onClick={somar} > + </Button>
+        
         
         
         </div>
