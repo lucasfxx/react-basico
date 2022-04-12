@@ -6,20 +6,15 @@ import Objeto from "./pages/Objeto";
 import Pagina1 from "./pages/Pagina1";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Container } from "react-bootstrap";
-import Contador from "./pages/Contador";
 import FilmesPopulares from "./pages/filmes/FilmesPopulares";
 import FilmesDetalhes from "./pages/filmes/FilmesDetalhes";
+import FilmesLancamentos from "./pages/filmes/FilmesLancamentos";
+import FilmesEmCartaz from "./pages/filmes/FilmesEmCartaz";
 
 function App() {
   return (
     <div>
-
-
       <BrowserRouter>
-
-
-
-
         <Menu />
         <Container>
           <Routes>
@@ -28,20 +23,14 @@ function App() {
             <Route path="/array" element={<Array />} />
             <Route path="/objeto" element={<Objeto />} />
             <Route path="/pagina1" element={<Pagina1 />} />
-            <Route path="/contador" element={<Contador />} />
-            <Route path="/filmespopulares" element={<FilmesPopulares />} />
+            <Route path="/filmes/populares" element={<FilmesPopulares />} />
+            <Route path="/filmes/lancamentos" element={<FilmesLancamentos />} />
+            <Route path="/filmes/Em/Cartaz" element={<FilmesEmCartaz />} />
             <Route path="/filmes/:id" element={<FilmesDetalhes />} />
           </Routes>
-
         </Container>
       </BrowserRouter>
-
-
-
-
-
     </div>
-
   );
 }
 

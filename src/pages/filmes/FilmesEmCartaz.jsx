@@ -3,13 +3,13 @@ import { Button, Card, Col, Row } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import apiFilmes from '../../services/apiFilmes'
 
-const FilmesPopulares = () => {
+const FilmesEmCartaz = () => {
 
     const [filmes, setFilmes] = useState([])
 
     useEffect(() => {
 
-        apiFilmes.get('movie/popular?language=pt-BR').then(resultado => {
+        apiFilmes.get('movie/now_playing?language=pt-BR').then(resultado => {
             setFilmes(resultado.data.results)
         })
 
@@ -17,7 +17,7 @@ const FilmesPopulares = () => {
 
     return (
         <div>
-            <h1>Filmes Populares</h1>
+            <h1>Filmes em Cartaz</h1>
 
             <Row>
                 {filmes.map(item => (
@@ -26,7 +26,7 @@ const FilmesPopulares = () => {
                             <Card.Img variant="top" src={'https://image.tmdb.org/t/p/w500/' + item.poster_path} />
                             <Card.Body>
                                 <Card.Title>{item.title} ({item.id})</Card.Title>
-                                <Card.Text>{item.original_title}</Card.Text>
+                                <Card.Text>{item.release_date}</Card.Text>
                                 <Card.Text>Popularidade: {item.popularity}</Card.Text>
 
                                 <Link className="btn btn-dark" to={'/filmes/' + item.id}>
@@ -42,4 +42,4 @@ const FilmesPopulares = () => {
     )
 }
 
-export default FilmesPopulares
+export default FilmesEmCartaz
