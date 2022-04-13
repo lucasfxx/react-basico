@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import { Card, Col, Row } from 'react-bootstrap'
-import { useParams } from 'react-router-dom'
+import { Button, Card, Col, Row } from 'react-bootstrap'
+import { Link, Navigate, useParams } from 'react-router-dom'
 import apiFilmes from '../../services/apiFilmes'
 
 const FilmesDetalhes = () => {
 
     const params = useParams()
+    
 
     const [filme, setFilme] = useState({})
 
@@ -16,9 +17,18 @@ const FilmesDetalhes = () => {
     }, [])
 
     return (
+         
         <div>
-            
+        {!filme.id && <h1>...Carregando</h1>}
+        {filme.id && 
+             
+             
+        <>
+        
+        
+        
             <h1>{filme.title}</h1>
+          
 
             <Row>
                 <Col md={4}>
@@ -31,9 +41,20 @@ const FilmesDetalhes = () => {
                     <p><strong>Popularidade: </strong>{filme.popularity}</p>
                     <p><strong>Data de Lançamento: </strong>{filme.release_date}</p>
                     <p><strong>Orçamento: </strong>{filme.budget}</p>
+                    <p><strong>Gêneros: </strong>
+                        {filme.genres.map(item => (
+                            <span>{item.name}, </span>
+                        ))}
+                    </p>
                     <p><strong>Sinopse: </strong>{filme.overview}</p>
+
+                    <Link className='btn btn-dark' to={-1}>Voltar</Link>
                 </Col>
             </Row>
+            
+            </>
+            }
+        
 
         </div>
     )

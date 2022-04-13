@@ -18,10 +18,11 @@ const FilmesPopulares = () => {
     return (
         <div>
             <h1>Filmes Populares</h1>
+            { filmes.length === 0 && <h1>...Carregando</h1>}
 
             <Row>
                 {filmes.map(item => (
-                    <Col md={3} className="mb-3">
+                    <Col key={item.id} md={3} className="mb-3">
                         <Card>
                             <Card.Img variant="top" src={'https://image.tmdb.org/t/p/w500/' + item.poster_path} />
                             <Card.Body>
