@@ -1,63 +1,100 @@
-import React, { useEffect, useState } from 'react'
-import { Button, Card, Col, Row } from 'react-bootstrap'
-import { Link, Navigate, useParams } from 'react-router-dom'
-import apiFilmes from '../../services/apiFilmes'
+        import React, { useEffect, useState } from 'react'
+        import { Button, Card, Col, Row } from 'react-bootstrap'
+        import { Link, Navigate, useParams } from 'react-router-dom'
+        import apiFilmes from '../../services/apiFilmes'
 
-const FilmesDetalhes = () => {
+        const FilmesDetalhes = () => {
 
-    const params = useParams()
-    
-
-    const [filme, setFilme] = useState({})
-
-    useEffect(() => {
-        apiFilmes.get('movie/' + params.id + '?language=pt-BR').then(resultado => {
-            setFilme(resultado.data)
-        })
-    }, [])
-
-    return (
-         
-        <div>
-        {!filme.id && <h1>...Carregando</h1>}
-        {filme.id && 
-             
-             
-        <>
-        
-        
-        
-            <h1>{filme.title}</h1>
-          
-
-            <Row>
-                <Col md={4}>
-                    <Card>
-                        <Card.Img variant="top" src={'https://image.tmdb.org/t/p/w500/' + filme.poster_path} />
-                    </Card>
-                </Col>
-                <Col md={8}>
-                    <p><strong>Título Original: </strong>{filme.original_title}</p>
-                    <p><strong>Popularidade: </strong>{filme.popularity}</p>
-                    <p><strong>Data de Lançamento: </strong>{filme.release_date}</p>
-                    <p><strong>Orçamento: </strong>{filme.budget}</p>
-                    <p><strong>Gêneros: </strong>
-                        {filme.genres.map(item => (
-                            <span>{item.name}, </span>
-                        ))}
-                    </p>
-                    <p><strong>Sinopse: </strong>{filme.overview}</p>
-
-                    <Link className='btn btn-dark' to={-1}>Voltar</Link>
-                </Col>
-            </Row>
+            const params = useParams()
             
-            </>
-            }
-        
 
-        </div>
-    )
-}
+            const [filme,  setFilme] = useState({})
+            const [atores,  setAtores] = useState([])
+            
 
-export default FilmesDetalhes
+            useEffect(() => {
+                apiFilmes.get('movie/' + params.id + '?language=pt-BR').then(resultado => {
+                    setFilme(resultado.data)
+                })
+            }, [])
+            useEffect(() => {
+                apiFilmes.get('movie/' + params.id + '/credits?language=pt-BR').then(resultado => {
+                    setAtores(resultado.data.cast)
+                })
+            }, [])
+
+            return (
+                
+                <div>
+                {!filme.id && <h1>...Carregando</h1>}
+                {filme.id && 
+                    
+                    
+                <>
+                
+                
+                
+                    <h1>{filme.title}</h1>
+                
+
+                    <Row>
+                        <Col md={4}>
+                            <Card>
+                                <Card.Img variant="top" src={'https://image.tmdb.org/t/p/w500/' + filme.poster_path} />
+                            </Card>
+                        </Col>
+                        <Col md={8}>
+                            <p><strong>Título Original: </strong>{filme.original_title}</p>
+                            <p><strong>Popularidade: </strong>{filme.popularity}</p>
+                            <p><strong>Data de Lançamento: </strong>{filme.release_date}</p>
+                            <p><strong>Orçamento: </strong>{filme.budget}</p>
+                            <p><strong>Gêneros: </strong>
+                                {filme.genres.map(item => (
+                                    <span>{item.name}, </span>
+                                ))}
+                            </p>
+                            <p><strong>Sinopse: </strong>{filme.overview}</p>
+                            
+
+                            <Link className='btn btn-dark' to={-1}>Voltar</Link>
+                        
+
+                        </Col>
+                        <Col md={12} className='mt-3'>
+                            <h1>Atores</h1>
+                            
+                            </Col>
+                            <Row>
+                            {atores.map(item=>(
+                        <Col md={2} className='mt-4'>
+                            <Link>
+                            <Card title={item.name}>
+                            <Card.Img variant="top" src={'https://image.tmdb.org/t/p/w500/' + item.profile_path} />
+                        </Card>
+                        </Link>
+                        </Col>
+                            ))}
+                            </Row>
+                    </Row>
+                    
+
+
+
+                    </>
+                    
+                
+                    
+                    
+                    
+                    
+                    
+                    
+                
+                    }
+                
+
+                </div>
+            )
+        }
+
+        export default FilmesDetalhes
