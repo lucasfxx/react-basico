@@ -21,6 +21,9 @@ const Menu = () => {
             <Link className="dropdown-item" to="/filmes/lancamentos">Filmes Lançamento</Link>
             <Link className="dropdown-item" to="/filmes/Em/Cartaz">Filmes em Cartaz</Link>
         </NavDropdown>
+        <NavDropdown title="Series" className='show' id="basic-nav-dropdown">
+            <Link className="dropdown-item" to="/series/populares">Series Populares</Link>
+          </NavDropdown>
           </Nav>
         </Container>
       </Navbar>
