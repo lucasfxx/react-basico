@@ -1,35 +1,34 @@
-import React from 'react'
-import { useEffect } from 'react'
-import { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Card, Col, Row } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import apiFilmes from '../../services/apiFilmes'
 
-const SeriesPopulares = () => {
+const SeriesCartaz = () => {
 
-    const [series, setSeries] = useState([])
 
-    useEffect(() => {
+  const [series, setSeries] = useState([])
 
-        apiFilmes.get('tv/popular?language=pt-BR').then(resultado => {
-            setSeries(resultado.data.results)
-        })
 
-    }, [])
+  useEffect(() => {
+
+    apiFilmes.get('tv/on_the_air?language=pt-BR').then(resultado => {
+        setSeries(resultado.data.results)
+    })
+
+}, [])
 
 
 
   return (
     <div>
-        <h1>Séries Populares</h1>
+      <h1>Séries No Ar</h1>
         { series.length === 0 && <h1>...Carregando</h1>}
-       
 
-        <Row>
-            {series.map(item => (
-                <Col key={item.id} md={3} className="mb-3">
-                    <Card>
-                    <Card.Img variant="top" src={'https://image.tmdb.org/t/p/w500/' + item.poster_path} />
+      <Row>  
+        {series.map(item => (
+          <Col key={item.id} md={3} className="mb-3">
+            <Card>
+            <Card.Img variant="top" src={'https://image.tmdb.org/t/p/w500/' + item.poster_path} />
                             <Card.Body>
                                 <Card.Title>{item.name} ({item.id})</Card.Title>
                                 <Card.Text>{item.original_name}</Card.Text>
@@ -39,22 +38,13 @@ const SeriesPopulares = () => {
                                     Ver Detalhes
                                 </Link>
                                 </Card.Body>    
-                    </Card>
-
-
-
-                </Col>
-            ))}
-
-
-
-
+            </Card>
+          </Col>
+          
+          ))}
         </Row>
-
-
-
-    </div>
+      </div>
   )
 }
 
-export default SeriesPopulares
+export default SeriesCartaz

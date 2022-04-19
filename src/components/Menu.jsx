@@ -22,7 +22,9 @@ const Menu = () => {
             <Link className="dropdown-item" to="/filmes/Em/Cartaz">Filmes em Cartaz</Link>
         </NavDropdown>
         <NavDropdown title="Series de TV" className='show' id="basic-nav-dropdown">
-            <Link className="dropdown-item" to="/series/populares">Series Populares</Link>
+            <Link className="dropdown-item" to="/series/populares">Séries Populares</Link>
+            <Link className="dropdown-item" to="/series/cartaz">Séries No Ar</Link>
+            <Link className="dropdown-item" to="/series/lancamento">Séries Estrelando Hoje</Link>
           </NavDropdown>
           </Nav>
         </Container>
