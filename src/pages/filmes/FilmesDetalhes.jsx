@@ -37,7 +37,7 @@ const FilmesDetalhes = () => {
                                 <Card>
                                     <Card.Img variant="top" src={'https://image.tmdb.org/t/p/w500/' + filme.poster_path} />
                                 </Card>
-                            </Col>
+                            </Col>  
                             <Col md={8}>
                                 <p><strong>Título Original: </strong>{filme.original_title}</p>
                                 <p><strong>Popularidade: </strong>{filme.popularity}</p>

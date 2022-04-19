@@ -9,7 +9,7 @@ const SeriesDetalhes = () => {
 
     const [tv, setTv] = useState({})
     const [atores, setAtores] = useState([])
-    const [seasons, setSeasons] = useState([])
+    const [temporadas, setTeporadas] = useState([])
     const [elenco, setElenco] = useState([])
  
 
@@ -21,11 +21,13 @@ const SeriesDetalhes = () => {
             setAtores(resultado.data.cast)
             setElenco(resultado.data.crew)
              })
-        apiFilmes.get('tv/' + params.id + '/season?language=pt-BR').then(resultado => {
-            setSeasons(resultado.data.cast)
-                 })
-
         }, [])
+        useEffect(()=>{
+            const promessa = apiFilmes.get('tv/' + params.id + '?language=pt-BR')
+            promessa.then(resultado=>{setTeporadas(resultado.data.seasons);
+            })
+        }, [])
+
 
 
   return (
@@ -33,14 +35,14 @@ const SeriesDetalhes = () => {
                 {!tv.id && <h1>...Carregando</h1>}
                 {tv.id && 
                 <div> 
-                    <h1>{tv.title}</h1>
+                    <h1>{tv.name}</h1>
                     <Row>
                     <Col md={4}>
                                 <Card>
                                     <Card.Img variant="top" src={'https://image.tmdb.org/t/p/w500/' + tv.poster_path} />
                                 </Card>
                             </Col>
-                            </Row>
+                            
                 
                    
                             <Col md={8}>
@@ -63,6 +65,21 @@ const SeriesDetalhes = () => {
                             <Col md={12} className="mt-3">
                                 <h1>Temporadas</h1>
                             </Col>
+                            </Row>
+                            <div>                                
+                           <Row>
+                            {temporadas.map(item =>(
+                                <Col className='mb-3' key={item.id}>
+                                 <Card>
+                                 <Card.Img variant="top" src={ item.poster_path ? 'https://image.tmdb.org/t/p/w500'+ item.poster_path : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6pdTz5L8m-BnQaPfYvrKXSpvTxri_DDtSqw&usqp=CAU'} />
+                                    <Card.Body>
+                                      <Card.Title>{item.name} - {item.season_number}</Card.Title>
+                                    </Card.Body>
+                                  </Card>
+                                 </Col>
+                               ))}
+                           </Row>
+                         </div>
 
                             <Col md={12} className="mt-3">
                                 <h1>Atores</h1>
