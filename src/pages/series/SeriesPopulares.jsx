@@ -22,6 +22,7 @@ const SeriesPopulares = () => {
     <div>
         <h1>Series Populares</h1>
         { series.length === 0 && <h1>...Carregando</h1>}
+       
 
         <Row>
             {series.map(item => (
