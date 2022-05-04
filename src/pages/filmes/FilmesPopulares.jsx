@@ -15,10 +15,22 @@ const FilmesPopulares = () => {
 
     }, [])
 
+    function pesquisar(event){
+        console.log(event.target.value)
+        const query = event.target.value
+        apiFilmes.get('search/popular?language=pt-BR&query=' + query).then(resultado => {
+                setFilmes(resultado.data.results)
+            })
+
+    }
+
     return (
         <div>
             <h1>Filmes Populares</h1>
             { filmes.length === 0 && <h1>...Carregando</h1>}
+
+             <input type="text" name='pesquisar' size={5} onChange={pesquisar} id="pesquisar" />
+             <Button>Pesquisar</Button>
 
             <Row>
                 {filmes.map(item => (
